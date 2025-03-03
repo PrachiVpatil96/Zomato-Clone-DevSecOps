@@ -22,7 +22,7 @@ Deploying a React Js Zomato-clone Application. We will be using `Jenkins` as a C
 
 ---
 
- **Step 1. Launch an Ubuntu 22.04 EC2 Instance with size `t2.large`machine** 
+ ## **Step 1. Launch an Ubuntu 22.04 EC2 Instance with size `t2.large`machine** 
    1. You can attached an Elastic Ip address so that if you stopped your machine you can get an same ip address but look into an cost optimization in aws or azure .
    2. Here I am using an Aws cloud.
 
@@ -49,7 +49,44 @@ Deploying a React Js Zomato-clone Application. We will be using `Jenkins` as a C
 
  ✅ **Your EC2 instance is now associated with the Elastic IP.**  
    ![Preview](Images/3.png) 
-   
----
 
+Now logged in into the machine via `SSH`.
+
+---
+## Step 2. Install Jenkins Docker Sonarqube and Trivy
+ 1. Install Jdk-17 on your machine for jenkins
+    ```bash
+    sudo apt update && sudo apt install -y openjdk-17-jdk
+
+    ```
+ 2. To Install Jenkins in linux Go to [Long Term support](https://www.jenkins.io/doc/book/installing/linux/#debianubuntu)
+
+ 3. Once Jenkins is installed, you will need to go to your Web Browser and type your public-ip address along with port 8080, since Jenkins works on Port 8080.
+ 
+ 4. Now, grab your Public IP Address
+```bash
+   EC2 Public IP Address:8080
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+ 5. Jenkins is instelld Succefully,and You will see the follwing page
+
+![Preview](Images/4.png)
+
+ 6. Unlock Jenkins using an administrative password and install the suggested plugins.
+  `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+
+ 7. Jenkins will now get installed and install all the libraries.
+
+ ![Preview](Images/5.png)
+
+ 8. Create a user click on save and continue.
+
+ ![Preview](Images/6.png)
+
+ 9. Jenkins Getting Started Screen.
+
+![Preview](Images/6.png)
+
+
+ 
 
