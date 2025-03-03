@@ -199,11 +199,40 @@ Next, we will log in to Jenkins and start to configure our Pipeline in Jenkins
 3. **Login to SonarQube Server**  
 4. Navigate to:  
 - **Administration** → **Security** → **Users**
+
  ![Preview](Images/16.png)  
+
 - Click on **Tokens**  
 5. Click on **Update Token**  
+
  ![Preview](Images/17.png)
-6. **Give it a name** and click on **Generate Token**  
+
+6. **Give it a name** and click on **Generate Token** 
+
 7. Copy and store the token securely for Jenkins integration  
-8. Goto Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. It should look like this
+
+8. Goto Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text.
+
+![Preview](Images/18.png)
+
+9. You will this page once you click on create
+
+![Preview](Images/19.png)
+
+10. Now, go to Dashboard → Manage Jenkins → System and Add like the below image.
+
+![Preview](Images/20.png)
+
+The Configure System option is used in Jenkins to configure different server
+
+Global Tool Configuration is used to configure different tools that we install using Plugins
+
+We will install a sonar scanner in the tools.
+![Preview](Images/21.png)
+
+
+
+
+
+
 
