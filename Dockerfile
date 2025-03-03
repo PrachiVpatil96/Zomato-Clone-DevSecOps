@@ -1,3 +1,4 @@
+#Dockerfike for zomato app
 # Use Node.js 16 slim as the base image
 FROM node:16-slim
 
@@ -21,3 +22,5 @@ EXPOSE 3000
 
 # Start your Node.js server (assuming it serves the React app)
 CMD ["npm", "start"]
+
+
