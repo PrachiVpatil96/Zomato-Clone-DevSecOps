@@ -141,3 +141,69 @@ Next, we will log in to Jenkins and start to configure our Pipeline in Jenkins
 
 ---
 
+## Step 3 : Install Plugins like JDK, Sonarqube Scanner, NodeJs, OWASP Dependency Check
+
+## 🛠 3A — Install Plugin  
+
+## 📌 Steps to Install Plugins in Jenkins  
+
+1. Navigate to **Manage Jenkins** → **Plugins** → **Available Plugins**  
+2. Install the following plugins **without restart**:  
+
+   - **Eclipse Temurin Installer**  
+   - **SonarQube Scanner**  
+   - **NodeJs Plugin**  
+
+![preview](Images/12.png)
+
+
+## 🛠 3B — Configure Java and Node.js in Global Tool Configuration  
+
+### 📌 Steps to Configure Java (JDK 17) and Node.js (16)  
+
+1. Navigate to **Manage Jenkins** → **Global Tool Configuration**  
+2. Scroll down to **JDK** and **NodeJS** sections  
+3. Configure the tools as follows:  
+   - **JDK:** Install **JDK 17**  
+   - **Node.js:** Install **Node.js 16**  
+4. Click **Apply** and then **Save**  
+
+![preview](Images/13.png)
+
+![preview](Images/14.png)
+
+## 🛠 3C — Create a Job in Jenkins  
+
+## 📌 Steps to Create a Pipeline Job  
+
+1. Navigate to **Jenkins Dashboard**  
+2. Click on **New Item**  
+3. Enter the job name as **Zomato**  
+4. Select **Pipeline** as the job type  
+5. Click **OK**  
+6. Configure the pipeline as needed  
+7. Click **Apply** and then **Save**  
+
+✅ The Jenkins pipeline job **Zomato** is now created. 
+
+![preview](Images/15.png)
+
+## 🛠 Step 4 — Configure Sonar Server in Manage Jenkins  
+
+## 📌 Steps to Configure SonarQube Server  
+
+1. **Get the Public IP Address** of your EC2 instance  
+2. SonarQube runs on **Port 9000**, so access it using: 
+ `http:<public-ip>:9000`
+
+3. **Login to SonarQube Server**  
+4. Navigate to:  
+- **Administration** → **Security** → **Users**
+ ![Preview](Images/16.png)  
+- Click on **Tokens**  
+5. Click on **Update Token**  
+ ![Preview](Images/17.png)
+6. **Give it a name** and click on **Generate Token**  
+7. Copy and store the token securely for Jenkins integration  
+8. Goto Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. It should look like this
+
