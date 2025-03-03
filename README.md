@@ -285,6 +285,14 @@ pipeline{
     }
 }
 ```
+Click on Build now, you will see the stage view like this
+![Preview](Images/24.png)
+
+To see the report, you can go to Sonarqube Server and go to Projects.
+
+![Preview](Images/23.png)
+
+You can see the report has been generated and the status shows as passed. You can see that there are 1.3k lines. To see a detailed report, you can go to issues.
 
 
 
