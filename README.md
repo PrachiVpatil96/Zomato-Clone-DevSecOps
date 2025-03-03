@@ -230,6 +230,18 @@ Global Tool Configuration is used to configure different tools that we install u
 We will install a sonar scanner in the tools.
 ![Preview](Images/21.png)
 
+In the Sonarqube Dashboard add a quality gate also
+
+Add details
+```sh 
+#in url section of quality gate
+http://jenkins-public-ip:8080/sonarqube-webhook/
+```
+Administration–> Configuration–>Webhooks
+![Preview](Images/22.png)
+
+
+
 
 
 
