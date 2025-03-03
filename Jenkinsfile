@@ -11,6 +11,7 @@ pipeline {
     }
     
     environment {
+        NVD_API_KEY = credentials('NVD_API_KEY')  // Fetch API key securely
         SCANNER_HOME = tool 'sonar-scanner'  // Ensure this matches the SonarScanner tool name in Jenkins
     }
     
@@ -50,11 +51,44 @@ pipeline {
                 }
             }
         }
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit' --apiKey ${NVD_API_KEY}", odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
                 sh "npm install"
             }
         }
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                       sh "docker build -t zomato ."
+                       sh "docker tag zomato prachiii123/zomato:1.0 "
+                       sh "docker push prachiii123/zomato:1.0 "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image prachiii123/zomato:1.0 > trivy.txt"
+            }
+        }
+
+        stage('Deploy to container'){
+             steps{
+              sh 'docker run -d --name zomato -p 3000:3000 prachiii123/zomato:1.0'
+          }
+      }
     }
 }

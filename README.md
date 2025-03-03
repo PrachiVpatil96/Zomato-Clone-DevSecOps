@@ -294,7 +294,90 @@ To see the report, you can go to Sonarqube Server and go to Projects.
 
 You can see the report has been generated and the status shows as passed. You can see that there are 1.3k lines. To see a detailed report, you can go to issues.
 
+### Step 5 — Install OWASP Dependency Check Plugins
+GotoDashboard → Manage Jenkins → Plugins → OWASP Dependency-Check. Click on it and install it without restart.
 
+![Preview](Images/25.png)
+
+First, we configured the Plugin and next, we had to configure the Tool
+
+Goto Dashboard → Manage Jenkins → Tools →
+
+Click on Apply and Save here.
+![Preview](Images/26.png)
+
+Now go configure → Pipeline and add this stage to your pipeline and build.
+
+```bash
+stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+```
+
+The stage view would look like this,
+![Preview](Images/30.png)
+
+You will see that in status, a graph will also be generated and Vulnerabilities.
+![Preview](Images/)
+
+
+## Step 6 — Docker Image Build and Push
+
+1. We need to install the Docker tool in our system, Goto Dashboard → Manage Plugins → Available plugins → Search for Docker and install these plugins
+
+1. **Docker**
+
+2. **Docker Commons**
+
+3. **Docker Pipeline**
+
+4. **Docker API**
+
+5. **docker-build-step**
+
+and click on install without restart
+![Preview](Images/27.png)
+
+2. Now, goto Dashboard → Manage Jenkins → Tools →
+
+![Preview](Images/28.png)
+
+3. Add DockerHub Username and Password under Global Credentials
+![Preview](Images/29.png)
+
+4. Add this stage to Pipeline Script
+ ```bash
+
+ 
+
+
+
+stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                       sh "docker build -t zomato ."
+                       sh "docker tag zomato sevenajay/zomato:latest "
+                       sh "docker push sevenajay/zomato:latest "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image sevenajay/zomato:latest > trivy.txt"
+            }
+        }
+```
+4. You will see the output below, with a dependency trend.        
 
 
 
