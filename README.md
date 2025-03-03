@@ -54,6 +54,8 @@ Now logged in into the machine via `SSH`.
 
 ---
 ## Step 2. Install Jenkins Docker Sonarqube and Trivy
+
+ ### Installing Jenkins 
  1. Install Jdk-17 on your machine for jenkins
     ```bash
     sudo apt update && sudo apt install -y openjdk-17-jdk
@@ -85,8 +87,57 @@ Now logged in into the machine via `SSH`.
 
  9. Jenkins Getting Started Screen.
 
-![Preview](Images/6.png)
+![Preview](Images/7.png)
 
+### Installing Docker 
+```bash
+sudo apt-get update
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER
+newgrp docker
+sudo chmod 777 /var/run/docker.sock
+```
+#### After the docker installation, we create a sonarqube container (Remember to add 9000 ports in the security group).
 
+```sh
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+```
+1. Now our sonarqube is up and Running. 
+
+![preview](Images/8.png)
+
+![preview](Images/9.png)
+
+2. Enter username and password, click on login and change password
+ ```bash
+ username admin
+ password admin
+ ```
  
+![preview](Images/10.png)
+
+3. Update New password, This is Sonar Dashboard.
+
+![preview](Images/11.png)
+
+
+### Installing trivy
+
+```bash
+vi trivy.sh
+```
+
+```bash
+sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy -y
+```
+Run above script using `sh trivy.sh`
+
+
+Next, we will log in to Jenkins and start to configure our Pipeline in Jenkins
+
+---
 
