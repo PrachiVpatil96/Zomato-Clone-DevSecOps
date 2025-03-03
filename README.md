@@ -4,11 +4,12 @@ Deploying a React Js Zomato-clone Application. We will be using `Jenkins` as a C
 
 ---
 
-### DevSecOps cicd Prject flow :
+### DevSecOps  CICD Project flow :
 
   ![Preview](Images/1.png)
 
-  [CLICK HERE FOR GITHUB REPOSITORY](https://github.com/Aj7Ay/Zomato-Clone)
+  [FOR DETAILED BLOD CLICK HERE](https://mrcloudbook.com/zomato-clone-app-with-devsecops-ci-cd/)
+  
 
 ---
 
