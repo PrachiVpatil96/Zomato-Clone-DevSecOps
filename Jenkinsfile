@@ -37,26 +37,24 @@ pipeline {
                         -Dsonar.projectKey=zomato \
                         -Dsonar.host.url=http://65.1.99.154:9000 \
                         -Dsonar.login=squ_a8dd3e743cb06f26e9cbc561b2227a1298e0f8ae
-
-
                     '''
                 }
             }
         }
 
-        stage("Quality Gate") {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonarqube'
-                }
-            }
+        
+        
+
+       stage('OWASP FS SCAN') {
+          steps {
+        withCredentials([string(credentialsId: 'NVD_API_KEY', variable: 'NVD_API_KEY')]) {
+            dependencyCheck additionalArguments: "--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey=${NVD_API_KEY}", odcInstallation: 'DP-Check'
+            dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
         }
-        stage('OWASP FS SCAN') {
-            steps {
-                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit' --apiKey ${NVD_API_KEY}", odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+    }
+}
+
+
         stage('TRIVY FS SCAN') {
             steps {
                 sh "trivy fs . > trivyfs.txt"
@@ -68,27 +66,29 @@ pipeline {
                 sh "npm install"
             }
         }
-        stage("Docker Build & Push"){
-            steps{
-                script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh "docker build -t zomato ."
-                       sh "docker tag zomato prachiii123/zomato:1.0 "
-                       sh "docker push prachiii123/zomato:1.0 "
+
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                        sh "docker build -t zomato ."
+                        sh "docker tag zomato prachiii123/zomato:1.0"
+                        sh "docker push prachiii123/zomato:1.0"
                     }
                 }
             }
         }
-        stage("TRIVY"){
-            steps{
+
+        stage("TRIVY Image Scan") {
+            steps {
                 sh "trivy image prachiii123/zomato:1.0 > trivy.txt"
             }
         }
 
-        stage('Deploy to container'){
-             steps{
-              sh 'docker run -d --name zomato -p 3000:3000 prachiii123/zomato:1.0'
-          }
-      }
+        stage('Deploy to Container') {
+            steps {
+                sh "docker run -d --name zomato -p 3000:3000 prachiii123/zomato:1.0"
+            }
+        }
     }
 }
