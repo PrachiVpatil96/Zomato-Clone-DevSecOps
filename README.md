@@ -8,7 +8,7 @@ Deploying a React Js Zomato-clone Application. We will be using `Jenkins` as a C
 
   ![Preview](Images/1.png)
 
-  [FOR DETAILED BLOD CLICK HERE](https://mrcloudbook.com/zomato-clone-app-with-devsecops-ci-cd/)
+  [FOR DETAILED BLOG CLICK HERE](https://mrcloudbook.com/zomato-clone-app-with-devsecops-ci-cd/)
   
 
 ---
@@ -19,6 +19,7 @@ Deploying a React Js Zomato-clone Application. We will be using `Jenkins` as a C
   - Jenkins Installed
   - Account on Dockerhub
   - Docker installed
+  - Install Nodejs nd npn on Jenkins
 
 ---
 
