@@ -326,7 +326,7 @@ The stage view would look like this,
 ![Preview](Images/30.png)
 
 You will see that in status, a graph will also be generated and Vulnerabilities.
-![Preview](Images/)
+![Preview](Images/34.png)
 
 
 ## Step 6 — Docker Image Build and Push
@@ -377,7 +377,50 @@ stage("Docker Build & Push"){
             }
         }
 ```
-4. You will see the output below, with a dependency trend.        
+4. You will see the output below, with a dependency trend. 
+
+![Preview](Images/35.png)
+
+5. When you log in to Dockerhub, you will see a new image is created
+
+![Preview](Images/33.png)
+
+6. Now Run the container to see if the app coming up or not by adding the below stage
+```bash
+stage('Deploy to container'){
+     steps{
+            sh 'docker run -d --name zomato -p 3000:3000 prachiii123/zomato:latest'
+          }
+      }
+```
+7. Youll see the stage view in pipeline 
+  Go to Jenkins Dashboard → Click on your Pipeline job → Navigate to the Stage View section on the job’s main page.
+
+![Preview](Images/35.png)
+
+8. To See the output type on the browser as below 
+   `http:<pubic-ipa>:3000` Youll be directed to 
+
+![Preview](Images/37.png)
+
+## Step 8: Terminate instances.
+
+Complete Pipeline [Jenkinsfile](/Jenkinsfile)
+
+
+**Conclusion**
+- Implementing DevSecOps in this project successfully integrated security, development, and operations, ensuring a secure, automated, and efficient CI/CD pipeline. By leveraging Jenkins, Docker, Kubernetes, AWS, and security tools like Snyk and OWASP ZAP, we enhanced code security, automated vulnerability scanning, and streamlined deployments. This approach reduced security risks, improved compliance, and accelerated software delivery while maintaining high reliability. The project highlights the importance of shifting security left, fostering a collaborative culture between DevOps and security teams to build resilient and secure applications
+
+
+I Hope Youll find the project useful, Happy Learning!! 😃
+
+
+
+
+
+ 
+
+     
 
 
 
