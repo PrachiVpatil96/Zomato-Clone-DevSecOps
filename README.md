@@ -366,15 +366,15 @@ stage("Docker Build & Push"){
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t zomato ."
-                       sh "docker tag zomato sevenajay/zomato:latest "
-                       sh "docker push sevenajay/zomato:latest "
+                       sh "docker tag zomato prachiii123/zomato:1.0'
+                       sh "docker push prachiii123/zomato:1.0'
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sevenajay/zomato:latest > trivy.txt"
+                sh "trivy image  prachiii123/zomato:1.0 > trivy .txt"
             }
         }
 ```
@@ -390,7 +390,7 @@ stage("Docker Build & Push"){
 ```bash
 stage('Deploy to container'){
      steps{
-            sh 'docker run -d --name zomato -p 3000:3000 prachiii123/zomato:latest'
+            sh 'docker run -d --name zomato -p 3000:3000 prachiii123/zomato:1.0'
           }
       }
 ```
