@@ -366,8 +366,8 @@ stage("Docker Build & Push"){
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t zomato ."
-                       sh "docker tag zomato prachiii123/zomato:1.0'
-                       sh "docker push prachiii123/zomato:1.0'
+                       sh "docker tag zomato prachiii123/zomato:1.0"
+                       sh "docker push prachiii123/zomato:1.0"
                     }
                 }
             }
@@ -410,7 +410,7 @@ Complete Pipeline [Jenkinsfile](/Jenkinsfile)
 
 
 **Conclusion**
-- Implementing DevSecOps in this project successfully integrated security, development, and operations, ensuring a secure, automated, and efficient CI/CD pipeline. By leveraging Jenkins, Docker, Kubernetes, AWS, and security tools like Snyk and OWASP ZAP, we enhanced code security, automated vulnerability scanning, and streamlined deployments. This approach reduced security risks, improved compliance, and accelerated software delivery while maintaining high reliability. The project highlights the importance of shifting security left, fostering a collaborative culture between DevOps and security teams to build resilient and secure applications
+- Implementing DevSecOps in this project successfully integrated security, development, and operations, ensuring a secure, automated, and efficient CI (continous Integration) pipeline. By leveraging Jenkins, Docker, Kubernetes, AWS, and security tools like Snyk and OWASP ZAP, we enhanced code security, automated vulnerability scanning, and streamlined deployments. This approach reduced security risks, improved compliance, and accelerated software delivery while maintaining high reliability. The project highlights the importance of shifting security left, fostering a collaborative culture between DevOps and security teams to build resilient and secure applications
 
 
 I Hope Youll find the project useful, Happy Learning!! 😃
